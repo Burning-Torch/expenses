@@ -29,11 +29,25 @@ class ExpenseCard extends StatelessWidget {
           style: Theme.of(context).textTheme.titleLarge,
         ),
         subtitle: Text(DateFormat.yMMMd().format(expense.date)),
-        trailing: IconButton(
-          onPressed: () => removeExpense(expense.id),
-          color: Theme.of(context).errorColor,
-          icon: const Icon(Icons.delete),
-        ),
+        trailing: MediaQuery.of(context).size.width > 460
+            ? TextButton.icon(
+                onPressed: () => removeExpense(expense.id),
+                label: const Text(
+                  'Delete',
+                  style: TextStyle(
+                    color: Colors.red,
+                  ),
+                ),
+                icon: const Icon(
+                  Icons.delete,
+                  color: Colors.red,
+                ),
+              )
+            : IconButton(
+                onPressed: () => removeExpense(expense.id),
+                color: Theme.of(context).errorColor,
+                icon: const Icon(Icons.delete),
+              ),
       ),
     );
   }
